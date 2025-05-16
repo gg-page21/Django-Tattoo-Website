@@ -9,6 +9,11 @@
 
 
     <h1>Portofiliu</h1>
+    {% for tattoo in tattoos %}
+    <div class="tattoo">  
+        <img src="{{ tattoo.image.url }}" alt="{{ tattoo.title }}">
+    </div>
+    {% endfor %}
 </div>
 
 

@@ -5,13 +5,18 @@
 
 {% block content %}
 
-<div> 
+<link rel="stylesheet" href="{% static 'css/portofoliu.css' %}">
 
 
-    <h1>Portofiliu</h1>
+<h1>Portofoliu</h1>
+
+<div class="tattoo-container"> 
+
+
+    
     {% for tattoo in tattoos %}
     <div class="tattoo">  
-        <img src="{{ tattoo.image.url }}" alt="{{ tattoo.title }}">
+        <img src="{{ tattoo.image.url }}" alt="tattoo-image">
     </div>
     {% endfor %}
 </div>

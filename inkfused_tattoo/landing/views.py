@@ -10,7 +10,7 @@ class PortofoliuView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tattoos'] = Tattoo.objects.all().order_by('-created_at')[:3]
+        context['tattoos'] = Tattoo.objects.all()
         return context
     
 class GhidCompletView(TemplateView):

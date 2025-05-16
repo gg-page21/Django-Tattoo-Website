@@ -1,0 +1,13 @@
+ .about-me{
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    .left-container,
+    .middle-container,
+    .right-container{
+        height: 500px;
+        padding:50px;
+        margin: 5px;
+    }

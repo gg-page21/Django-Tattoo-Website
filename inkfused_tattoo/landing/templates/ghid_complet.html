@@ -1,23 +1,60 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %}Ghid complet{% endblock %}
 
 {% block content %}
 
+{% load static %}
+
 <link rel="stylesheet" href="{% static 'css/ghid_complet.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<div class="page-title">
+    <h2><img src="https://see.fontimg.com/api/rf5/1GzL0/YmQzMDVmZmQyZDQ1NGQ1M2FkM2YxNTQwODRjMDc4ZWEudHRm/R2hpZCBjb21wbGV0/alice-in-wonderland.png?r=fs&h=142&w=2000&fg=F9C30D&bg=000000&tb=1&s=71" alt="Medieval fonts"></h2>
+</div>
+
+<div class="decorative-image">
+    <img src="{% static 'images/history_of_tattooing.png' %}" alt="History of Tattooing">
+</div>
+
+{% for guide in guides %}
+
+    <h1>{{ guide.name }}</h1>
+<p>{{ guide.description }}</p>
 
 
-<div> 
+
+<div class="slider-container"> 
 
 
-    <h1>Ghid complet</h1>
+   <div class="slider">
+        <button type="button" class="ctrl prev" aria-label="Previous slide">
+        ◀
+        </button>
+
+        <main class="stage"></main>
+
+        <button type="button" class="ctrl next" aria-label="Next slide">
+        ▶
+        </button>
+        <div class="thumbnails">
+        
+            {% for image in guide.images.all %}
+                <button class="thumb" data-src="{{ image.image.url }}" {% if forloop.parentloop.first and forloop.first %}data-selected="true"{% endif %}>
+                    <img src="{{ image.image.url }}" alt="{{ guide.name }}">
+                </button>
+            {% endfor %}
+       
+        </div>
+    </div>
+
 </div>
 
 
 
 
 
+ {% endfor %}
 
 
 
@@ -27,5 +64,74 @@
 
 
 
+
+
+
+
+
+{% comment %} ------------------------------------------------------------------------------------------------------------ {% endcomment %}
+
+<script>
+function makeSlider(slider) {
+    const stage = slider.querySelector('.stage');
+    const thumbs = [...slider.querySelectorAll('.thumb')];
+    let index = thumbs.findIndex(b => b.hasAttribute('data-selected'));
+    if (index === -1) index = 0;
+
+    function show(i) {
+        index = (i + thumbs.length) % thumbs.length;
+        thumbs.forEach((b, j) => b.toggleAttribute('data-selected', j === index));
+        const src = thumbs[index].dataset.src;
+        stage.innerHTML = `<img src="${src}" alt="">`;
+
+        // Scroll the selected thumb into view
+        thumbs[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+
+    show(index);
+
+    thumbs.forEach((b, i) => {
+        b.addEventListener('click', () => show(i)); // single click: change slider
+        b.addEventListener('dblclick', (e) => {     // double click: open modal
+            const img = b.querySelector('img');
+            modalImg.src = img.src;
+            modal.classList.add('active');
+            e.stopPropagation();
+        });
+    });
+    slider.querySelector('.prev').addEventListener('click', () => show(index - 1));
+    slider.querySelector('.next').addEventListener('click', () => show(index + 1));
+    slider.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') show(index - 1);
+        if (e.key === 'ArrowRight') show(index + 1);
+        if (e.key === 'Home') show(0);
+        if (e.key === 'End') show(thumbs.length - 1);
+    });
+}
+
+document.querySelectorAll('.slider').forEach(makeSlider);
+
+// Modal logic
+const modal = document.getElementById('image-modal');
+const modalImg = document.getElementById('modal-img');
+const closeModal = document.getElementById('close-modal');
+
+// Close modal on X click or background click
+closeModal.addEventListener('click', () => modal.classList.remove('active'));
+modal.addEventListener('click', e => {
+  if (e.target === modal) modal.classList.remove('active');
+});
+
+// Optional: close modal on ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modal.classList.remove('active');
+});
+</script>
+
+<!-- Modal for full-size image preview -->
+<div id="image-modal" class="image-modal">
+  <span class="close-modal" id="close-modal">&times;</span>
+  <img class="modal-content" id="modal-img" src="" alt="Full size image">
+</div>
 
 {% endblock %}

@@ -1,16 +1,69 @@
- .tattoo-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: 1fr;
-        height: 100vh;
-    }
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
 
-   .tattoo{
-        margin:10px;
-   }
+h1 {
+    text-align: center;
+    margin: 80px 0 0 0;
+    padding: 20px 0;
+    background-color: #000000;
+    width: 100%;
+    position: relative;
+    top: 0;
+}
+
+.tattoo-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    min-height: 100vh;
+    padding: 0 5vw 20px 5vw;
+    margin: 0 auto 50px auto;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.tattoo {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+}
+
+.tattoo img {
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+}
+
+footer {
+    margin-top: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #000000;
+    color: white;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+    .tattoo-container {
+        grid-template-columns: 1fr;
+        padding: 0 4vw 20px 4vw;
+        width: 92vw;
+    }
+    
     .tattoo img {
         width: 100%;
-        height: auto;
-        object-fit: cover;
-    
     }
+}
+
+  

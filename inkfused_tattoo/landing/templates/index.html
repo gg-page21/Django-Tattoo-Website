@@ -4,20 +4,20 @@
 {% block title %}Inkfused Tattoo{% endblock %}
 
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
+<video autoplay loop muted playsinline class="hero-video">
+    <source src="{% static 'video/inkfused.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
+<div id="despre-section"></div>
 
- <h1>Welcome to Inkfused Tattoo Studio</h1>
+<h1 style="text-align: center;" id="header">
+    <img src="https://see.fontimg.com/api/rf5/1GzL0/YmQzMDVmZmQyZDQ1NGQ1M2FkM2YxNTQwODRjMDc4ZWEudHRm/RGVzcHJlIG1pbmU/alice-in-wonderland.png?r=fs&h=100&w=1400&fg=F9C30D&bg=000000&tb=1&s=71" alt="Medieval fonts" style="max-width: 400px; width: 100%; height: auto;">
+</h1>
 
-
-
-<p>Video</p>
-
-
-
- <h1>Despre mine</h1>
 
 <div class="about-me" id="about-me">
 
@@ -46,8 +46,11 @@
 
     <div class="middle-container"> 
         
-        <p>At Inkfused, we prioritize safety and hygiene, using only the highest quality materials and equipment. Our studio is designed to make you feel comfortable and relaxed, allowing you to enjoy the process of getting your tattoo.</p>
-
+        <p>Tatuajul este pentru mine o formă de artă profundă, vie, care îmbină precizia tehnică cu expresia personală. De-a lungul anilor, am învățat să ascult pielea ca pe o pânză care vorbește și să construiesc pe ea compoziții echilibrate, care spun o poveste — clară, estetică și armonioasă.
+Lucrez cu o atenție deosebită la detalii, la flow-ul natural al corpului și la modul în care fiecare linie sau umbră se așază pe volum. Folosesc echipament de ultimă generație, cartușe sterile și pigmenți de calitate superioară, pentru a garanta nu doar un rezultat artistic, ci și durabil în timp.
+Stilul meu este [ex: predominant black & grey / realist / ornamental / abstract], dar îmi place să experimentez și să adaptez fiecare lucrare în funcție de personalitatea și viziunea clientului. Fie că e vorba de o compoziție amplă sau un design simplu cu încărcătură simbolică, tratamentul artistic și grija pentru detalii rămân constante.
+Cred într-un proces creativ colaborativ — ascult, schițez, ajustez — până când ajungem împreună la o formă finală care nu doar arată bine, ci „simte” bine. Tatuajul, pentru mine, nu e doar imagine — e identitate, emoție și echilibru între suflet și tehnică.
+Dacă rezonezi cu felul în care văd această artă, te invit să lucrăm împreună și să dăm contur unei părți din povestea ta.</p>
     </div>
 
     <div class="right-container"> 
@@ -73,15 +76,5 @@
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

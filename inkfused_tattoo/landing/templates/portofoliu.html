@@ -7,32 +7,16 @@
 
 <link rel="stylesheet" href="{% static 'css/portofoliu.css' %}">
 
-
-<h1>Portofoliu</h1>
+<h1>
+    <img src="https://see.fontimg.com/api/rf5/1GzL0/YmQzMDVmZmQyZDQ1NGQ1M2FkM2YxNTQwODRjMDc4ZWEudHRm/UG9ydG9mb2xpdQ/alice-in-wonderland.png?r=fs&h=142&w=2000&fg=F9C30D&bg=000000&tb=1&s=71" alt="Medieval fonts" style="max-width: 500px; width: 100%; height: auto;">
+</h1>
 
 <div class="tattoo-container"> 
-
-
-    
     {% for tattoo in tattoos %}
     <div class="tattoo">  
         <img src="{{ tattoo.image.url }}" alt="tattoo-image">
     </div>
     {% endfor %}
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

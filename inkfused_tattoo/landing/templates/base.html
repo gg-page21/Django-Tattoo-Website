@@ -2,35 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Inkfused Tattoo Studio - Professional tattoo services">
+    <meta name="keywords" content="tattoo, tattoo studio, professional tattoo, inkfused">
+    <meta name="author" content="Inkfused Tattoo">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <!-- Navbar -->
-    <nav>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+});
+</script>
+
+<body class="{% if request.path == '/' %}homepage{% else %}inner-page{% endif %}">
+    <!-- Navbar -->
+    <nav class="navbar {% if request.path == '/' %}homepage-nav{% else %}default-nav{% endif %}">
         <div class="logo">
             <img src="{% static 'images/logo.png' %}" alt="Inkfused Tattoo Studio Logo">
         </div>
+        <button class="mobile-menu-btn">☰</button>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="#despre-mine" </a>Despre mine </li>
-            <li><a href="{% url 'portofoliu' %}"> Portofoliu </a>  </li>
-            <li><a href="{% url 'ghid_complet' %}"> Ghid complet </a>  </li>
-           <li><a href="{% url 'intrebari_frecvente' %}"> Intrebari frecvente </a>  </li> 
-           <li><a href="{% url 'contact' %}"> Contact </a>  </li>
+            <li><a href="{% if request.path == '/' %}#despre-section{% else %}/?scroll=despre-section{% endif %}">Despre mine</a></li>
+            <li><a href="{% url 'portofoliu' %}">Portofoliu</a></li>
+            <li><a href="{% url 'ghid_complet' %}">Ghid complet</a></li>
+            <li><a href="{% url 'intrebari_frecvente' %}">Intrebari frecvente</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu handling
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.navbar ul');
+            
+            menuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.navbar')) {
+                    navMenu.classList.remove('show');
+                }
+            });
+
+            // Close menu when clicking a link
+            const navLinks = document.querySelectorAll('.navbar ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('show');
+                });
+            });
+
+            // Check for scroll parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const scrollTo = urlParams.get('scroll');
+            if (scrollTo) {
+                const element = document.getElementById(scrollTo);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            }
+
+            // Handle smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const element = document.querySelector(this.getAttribute('href'));
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Main Content -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
-
-
 
     <!-- Footer -->
     <footer>

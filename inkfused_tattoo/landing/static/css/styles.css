@@ -5,20 +5,24 @@
     
 }
 
-
-
+html {
+    scroll-behavior: smooth;
+}
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #000000;
 }
 
 body {
-    background-color:black;
     font-family: var(--font);
     font-size: var(--font-size);
     color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 li {
@@ -29,21 +33,140 @@ a {
     text-decoration: none;
     color:var(--text-color);
 }
-nav {
-   
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-}
-nav ul {
-    display: flex;
-    gap: 20px;
-    flex-direction: row;
-}
+
 .logo img {
     width: 100%;
-    max-width: 150px;
+    max-width: 120px;
     height: auto;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 5px 20px;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Transparent navbar for homepage */
+.homepage-nav {
+    background: transparent;
+}
+
+/* Black navbar for other pages */
+.default-nav {
+    background: #000000;  /* Solid black background for non-homepage pages */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+}
+
+.navbar .logo img {
+    opacity: 1;
+    filter: none;
+    transition: none;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    margin-right: 50px;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar ul li a {
+    color: white; /* default color */
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: goldenrod; /* hover color */ 
+}
+
+main {
+    flex: 1 0 auto;
+    padding-top: 0;
+}
+
+footer{
+    flex-shrink: 0;
+    text-align: center;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar ul {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        padding: 20px 0;
+        margin: 0;
+    }
+
+    .navbar ul.show {
+        display: flex;
+    }
+
+    .navbar ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .logo img {
+        max-width: 120px;
+    }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar ul {
+        gap: 15px;
+    }
+}
+
+/* Body styles for different pages */
+.homepage {
+    background-color: transparent;
+}
+
+.inner-page {
+    background-color: #000000;
 }
